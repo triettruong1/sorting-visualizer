@@ -1,14 +1,8 @@
-import { useState } from 'react';
-
 import '../Styles/Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({sliderHandler, sliderValue, handleNewArrayClick}) => {
 
-    var [sliderValue, setSliderValue] = useState(50);
-
-    const handleSlide = (event) => {
-        setSliderValue(event.target.value);
-    }
+    
 
     return (
         <div className="nav">
@@ -22,11 +16,11 @@ const Navigation = () => {
                 </select>
             </div>
             <div className="buttons">
-                <button>New Array</button>
+                <button onClick={handleNewArrayClick}>New Array</button>
                 <button>Begin</button>
             </div>
             <div>
-                <input type="range" min="1" max="100" value={sliderValue} id="element-amount" onChange={handleSlide}/>
+                <input type="range" min="1" max="100" value={sliderValue} id="element-amount" onChange={sliderHandler}/>
             </div>
         </div>
       );
