@@ -1,0 +1,16 @@
+.sorting-visualizer{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0 auto;
+    padding: 2em 2em;
+}
+
+
+.bar{
+    border: 1px solid #000;
+    width: 100%;
+    
+}
