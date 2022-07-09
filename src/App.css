@@ -5,6 +5,20 @@
   box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 /* Remove default margin */
 body,
 h1,
@@ -57,18 +71,31 @@ select {
   font: inherit;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-   scroll-behavior: auto;
-  }
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.flex-row{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+.restricted{
   
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+}
+
+.button{
+  border: none;
+  padding: .5em 1em;
+  background: #d17e11;
+  color: #fff;
+  border-radius: 3px;
+  text-transform: initial;
+  cursor: pointer;
+}
+.button:hover{
+  background-color: #d17e11ab;
+  border: 1px solid #d3b896;
 }

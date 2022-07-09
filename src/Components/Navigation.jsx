@@ -1,26 +1,21 @@
 import '../Styles/Navigation.css';
 
-const Navigation = ({sliderHandler, sliderValue, handleNewArrayClick, handleBeginClick}) => {
-
-    
-
+const Navigation = () => {
     return (
         <div className="nav">
-            <h1>Sorting Algorithms Visualizer</h1>
-            <div className="algoselect">
-                <select name="algos">
-                    <option value="bubble">Bubble Sort</option>
-                    <option value="selection">Selection Sort</option>
-                    <option value="quick">Quick Sort</option>
-                    <option value="heap">Heap Sort</option>
-                </select>
-            </div>
-            <div className="buttons">
-                <button onClick={handleNewArrayClick}>New Array</button>
-                <button onClick={handleBeginClick}>Begin</button>
-            </div>
-            <div>
-                <input type="range" min="1" max="100" value={sliderValue} id="element-amount" onChange={sliderHandler}/>
+            <div className="container flex-col header">
+                <h1>Sorting Algorithms Visualizer</h1>
+                <span className="choose">Choose Algorithm</span>
+                <div className="algoselect">
+                    <div className="select">
+                        <span>Select Algorithm</span>
+                    </div>
+                    <input type="hidden" name="algos"/>
+                    <ul className='dropdown-menu'>
+                        <li id="bubble"></li>
+                        <li id="insert"></li>
+                    </ul>
+                </div>
             </div>
         </div>
       );

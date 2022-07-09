@@ -1,7 +1,8 @@
 export const bubbleSort = sortingArray => {
     var animations = {
         steps: [],
-        swap: []
+        swap: [],
+        array: []
     };
     var array = sortingArray.slice();
     var stepCounter = 0;
@@ -21,5 +22,6 @@ export const bubbleSort = sortingArray => {
             stepCounter++;
         }
     }
+    animations.array = array.slice();
     return animations;
 };
