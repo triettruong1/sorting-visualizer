@@ -7,17 +7,20 @@ import Footer from './Components/Footer';
 function App() {
 
   var [sliderValue, setSliderValue] = useState(50);
-  var [clicked, setClicked] = useState(false);
-
-  
-
+  var [resetBtnClick, setResetBtnClick] = useState(false);
+  var [beginBtnClick, setBeginBtnClick] = useState(false);
   const handleSlide = (event) => {
     setSliderValue(event.target.value);
   }
 
   const handleResetClick = () => {
-    setClicked(!clicked);
+    setResetBtnClick(!resetBtnClick);
   }
+
+  const handleBeginClick = () => {
+    setBeginBtnClick(!beginBtnClick);
+  }
+
 
   return (
     <div className="App">
@@ -25,8 +28,9 @@ function App() {
           sliderHandler = {handleSlide} 
           sliderValue = {sliderValue} 
           handleNewArrayClick={handleResetClick}
+          handleBeginClick={handleBeginClick}
         />
-        <SortingVisualizer arrayAmount = {sliderValue} resetArray = {clicked}/>
+        <SortingVisualizer arrayAmount = {sliderValue} resetArrayBtn = {resetBtnClick} beginSortBtn = {beginBtnClick}/>
         <Footer />
     </div>
   );

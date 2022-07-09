@@ -1,6 +1,6 @@
 import '../Styles/Navigation.css';
 
-const Navigation = ({sliderHandler, sliderValue, handleNewArrayClick}) => {
+const Navigation = ({sliderHandler, sliderValue, handleNewArrayClick, handleBeginClick}) => {
 
     
 
@@ -17,7 +17,7 @@ const Navigation = ({sliderHandler, sliderValue, handleNewArrayClick}) => {
             </div>
             <div className="buttons">
                 <button onClick={handleNewArrayClick}>New Array</button>
-                <button>Begin</button>
+                <button onClick={handleBeginClick}>Begin</button>
             </div>
             <div>
                 <input type="range" min="1" max="100" value={sliderValue} id="element-amount" onChange={sliderHandler}/>
