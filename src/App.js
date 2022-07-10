@@ -1,15 +1,17 @@
 import './App.css';
 import SortingVisualizer from './Components/SortingVisualizer';
-import Navigation from './Components/Navigation';
+import Header from './Components/Header';
 import { useState, useEffect } from 'react';
 import Footer from './Components/Footer';
 import * as algos from './Helpers/Algorithms';
 
 function App() {
   var [array, setArray] = useState([]);
-  var [arraySize, setArraySize] = useState(50);
-  var [sliderValue, setSliderValue] = useState(50);
-  var animations = algos.bubbleSort(array);
+  var [arraySize, setArraySize] = useState(61);
+  var [sliderValue, setSliderValue] = useState(61);
+
+  var ACCENT_COLOR = "#dd9230";
+  var SECONDARY_COLOR = "#000";
 
   const handleSlide = (event) => {
     setSliderValue(event.target.value);
@@ -21,21 +23,34 @@ function App() {
   }
 
   const handleBeginClick = () => {
+    var animations = algos.bubbleSort(array);
+    console.log(animations);
     if (animations === undefined){
       return;
     } else {
-        animations.steps.forEach((step, index) => {
+      animations.steps.forEach((step, index) => {
+          const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0]+1})`);
+          const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1]+1})`);
+          
+          const isColorChange = index % 3 !== 1;
+          if (isColorChange){
+            const color = index % 3 === 0 ? ACCENT_COLOR : "#FFF";
             setTimeout(() => {
-                if (animations.swap[index]){
-                    swapAnimation(step[0], step[1]);
-                }
-            }, arraySize <= 25 ? index * 25 : index * 5);
+              firstEle.style.background = color;
+              secondEle.style.background = color;
+            }, arraySize <= 50 ? index * 40 : index * 5)
+          } else if (animations.swap[index]){
+            setTimeout(() => {
+              swapAnimation(step[0], step[1]);
+            }, arraySize <= 50 ? index * 40 : index * 5)
+          }
         })
     }
   }
 
   useEffect(() =>{
     setArraySize(sliderValue);
+    console.log(sliderValue);
   }, [sliderValue])
 
   useEffect (() => {
@@ -52,7 +67,7 @@ function App() {
 
   return (
     <div className="App">
-        <Navigation/>
+        <Header/>
         <SortingVisualizer array={array}/>
         <Footer
           sliderHandler = {handleSlide}

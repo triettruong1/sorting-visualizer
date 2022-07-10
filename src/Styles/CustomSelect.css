@@ -1,0 +1,19 @@
+span.choose {
+    color: #555;
+    padding: 5px 0 10px;
+    display: inherit
+}
+
+.select-box{
+    font-size: 1.3125rem;
+    background: var(--bg-clr-accent);
+    padding: .5em .5em;
+    color: #fff;
+    appearance: none;
+    border: 0;
+    text-align: center;
+}
+.select-box > option:hover{
+    background: var(--bg-clr-accent-hover) !important;
+    color: #fff;
+}

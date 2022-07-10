@@ -1,3 +1,8 @@
+:root{
+  --bg-clr-accent: #dd9230;
+  --bg-clr-accent-hover: #a36f2b;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -89,7 +94,7 @@ select {
 .button{
   border: none;
   padding: .5em 1em;
-  background: #d17e11;
+  background: var(--bg-clr-accent);
   color: #fff;
   border-radius: 3px;
   text-transform: initial;
@@ -97,5 +102,4 @@ select {
 }
 .button:hover{
   background-color: #d17e11ab;
-  border: 1px solid #d3b896;
 }

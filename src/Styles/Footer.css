@@ -6,3 +6,7 @@ footer{
     width: 100%; 
     height: 10vh;
 }
+
+.buttons > *{
+    margin-inline: 1em;
+}

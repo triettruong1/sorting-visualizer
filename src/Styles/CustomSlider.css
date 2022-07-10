@@ -1,0 +1,48 @@
+
+.range {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    width: 200px;
+    background: #fff;
+    border-radius: 10px;
+}
+.sliderValue{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+}
+.sliderValue > span {
+    text-align: center;
+    position: absolute;
+    background: var(--bg-clr-accent);
+    width: 2em;
+    height: 1.5em;
+    transform: translateY(-50%);
+}
+
+.field{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+    bottom: .5em;
+}
+
+.field > input{
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+    height: 3px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}

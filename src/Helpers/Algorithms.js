@@ -1,8 +1,7 @@
 export const bubbleSort = sortingArray => {
     var animations = {
         steps: [],
-        swap: [],
-        array: []
+        swap: []
     };
     var array = sortingArray.slice();
     var stepCounter = 0;
@@ -15,7 +14,19 @@ export const bubbleSort = sortingArray => {
                 [array[j], array[j+1]] = [array[j+1], array[j]];
                 animations.steps[stepCounter] = [j, j+1];
                 animations.swap[stepCounter] = true;
+                stepCounter++;
+                animations.steps[stepCounter] = [j, j+1];
+                animations.swap[stepCounter] = true;
+                stepCounter++;
+                animations.steps[stepCounter] = [j, j+1];
+                animations.swap[stepCounter] = true;
             } else{
+                animations.steps[stepCounter] = [j, j+1];
+                animations.swap[stepCounter] = false;
+                stepCounter++;
+                animations.steps[stepCounter] = [j, j+1];
+                animations.swap[stepCounter] = false;
+                stepCounter++;
                 animations.steps[stepCounter] = [j, j+1];
                 animations.swap[stepCounter] = false;
             }
