@@ -4,8 +4,8 @@ const Footer = ({sliderHandler, sliderValue, handleNewArrayClick, handleBeginCli
     return (  
         <footer className="flex-row controls">
             <div className="buttons">
-                <button className="button" onClick={handleNewArrayClick}>New Array</button>
-                <button className="button" onClick={handleBeginClick}>Begin</button>
+                <button className="button reset" onClick={handleNewArrayClick}>New Array</button>
+                <button className="button begin" onClick={handleBeginClick}>Begin</button>
             </div>
             <CustomSlider sliderHandler={sliderHandler} sliderValue={sliderValue} />
         </footer>

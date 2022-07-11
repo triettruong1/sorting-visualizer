@@ -1,3 +1,7 @@
+.canvas{
+    height: 63%;
+}
+
 .bar{
     background: #000;
     /* border: .3125em solid var(--bg-clr-accent); */

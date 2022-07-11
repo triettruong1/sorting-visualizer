@@ -15,18 +15,24 @@ function App() {
 
   const handleSlide = (event) => {
     setSliderValue(event.target.value);
-    newRandomizedArray();
   }
 
   const handleResetClick = () => {
+    resetColors();
     return newRandomizedArray();
   }
-
-  const handleBeginClick = () => {
+ 
+  const handleBeginClick = async () => {
     const selected = document.querySelector(".select-box").value;
+    const beginBtn = document.querySelector(".begin");
     switch (selected) {
       case "bubble":
-          beginBubbleSort();
+          beginBtn.disabled = true;
+          await new Promise((resolve, reject) => {
+
+            resolve(beginBubbleSort());
+          });
+          beginBtn.disabled = false;
         break;
       case "merge":
           // beginBubbleSort();
@@ -43,35 +49,49 @@ function App() {
     }
   }
 
+  var animations = algos.bubbleSort(array);
   function beginBubbleSort() {
-    var animations = algos.bubbleSort(array);
-    console.log(animations);
+    var unsortedEle = arraySize;
     if (animations === undefined){
       return;
     } else {
       animations.steps.forEach((step, index) => {
-          const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0]+1})`);
-          const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1]+1})`);
-          
-          const isColorChange = index % 3 !== 1;
-          if (isColorChange){
-            const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
+        const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0]+1})`);
+        const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1]+1})`);
+        
+        const isColorChange = index % 3 !== 1;
+        if (isColorChange){
+          const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
+          setTimeout(() => {
+            firstEle.style.background = color;
+            secondEle.style.background = color;
+          }, arraySize <= 50 ? index * 40 : index * 5)
+          if (index % 3 === 2 && step[1] === unsortedEle - 1){
+            const doneEle = document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`);
+            const lastEle = unsortedEle === 1 ? document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`) : null;
             setTimeout(() => {
-              firstEle.style.background = color;
-              secondEle.style.background = color;
-            }, arraySize <= 50 ? index * 40 : index * 5)
-          } else if (animations.swap[index]){
-            setTimeout(() => {
-              swapAnimation(step[0], step[1]);
-            }, arraySize <= 50 ? index * 40 : index * 5)
+              doneEle.style.background = ACCENT_COLOR;
+              if (lastEle !== null){
+                lastEle.style.background = ACCENT_COLOR;
+              }
+            }, arraySize <= 50 ? index * 40 : index * 5);
           }
-        })
+        } else if (animations.swap[index]){
+          setTimeout(() => {
+            swapAnimation(step[0], step[1]);
+          }, arraySize <= 50 ? index * 40 : index * 5)
+        }
+      })
     }
   }
 
+  useEffect(() => {
+    newRandomizedArray();
+  }, [arraySize])
+
   useEffect(() =>{
     setArraySize(sliderValue);
-    console.log(sliderValue);
+    resetColors();
   }, [sliderValue])
 
   useEffect (() => {
@@ -86,6 +106,12 @@ function App() {
       setArray(newArray);
   }
 
+  function resetColors(){
+    const bars = document.querySelectorAll(".bar");
+    bars.forEach(bar => {
+      bar.style.background = SECONDARY_COLOR;
+    });
+  }
   return (
       <div className="App">
           <Header/>
