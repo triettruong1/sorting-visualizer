@@ -1,10 +1,10 @@
-import './App.css';
 import SortingVisualizer from './Components/SortingVisualizer';
 import Header from './Components/Header';
 import { useState, useEffect } from 'react';
 import Footer from './Components/Footer';
 import * as algos from './Helpers/Algorithms';
 
+import './App.css';
 function App() {
   var [array, setArray] = useState([]);
   var [arraySize, setArraySize] = useState(61);
@@ -23,6 +23,27 @@ function App() {
   }
 
   const handleBeginClick = () => {
+    const selected = document.querySelector(".select-box").value;
+    switch (selected) {
+      case "bubble":
+          beginBubbleSort();
+        break;
+      case "merge":
+          // beginBubbleSort();
+        break;
+      case "quick":
+          // beginBubbleSort();
+        break;
+      case "selection":
+          // beginBubbleSort();
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  function beginBubbleSort() {
     var animations = algos.bubbleSort(array);
     console.log(animations);
     if (animations === undefined){
@@ -34,7 +55,7 @@ function App() {
           
           const isColorChange = index % 3 !== 1;
           if (isColorChange){
-            const color = index % 3 === 0 ? ACCENT_COLOR : "#FFF";
+            const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
             setTimeout(() => {
               firstEle.style.background = color;
               secondEle.style.background = color;
@@ -66,15 +87,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-        <Header/>
-        <SortingVisualizer array={array}/>
-        <Footer
-          sliderHandler = {handleSlide}
-          handleNewArrayClick={handleResetClick}
-          handleBeginClick={handleBeginClick}
-        />
-    </div>
+      <div className="App">
+          <Header/>
+          <SortingVisualizer array={array}/>
+          <Footer
+            sliderHandler = {handleSlide}
+            handleNewArrayClick={handleResetClick}
+            handleBeginClick={handleBeginClick}
+          />
+      </div>
   );
 }
 

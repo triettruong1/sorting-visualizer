@@ -5,7 +5,7 @@ span.choose {
 }
 
 .select-box{
-    font-size: 1.3125rem;
+    font-size: var(--fs-500);
     background: var(--bg-clr-accent);
     padding: .5em .5em;
     color: #fff;

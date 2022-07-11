@@ -1,6 +1,11 @@
 :root{
   --bg-clr-accent: #dd9230;
   --bg-clr-accent-hover: #a36f2b;
+
+  --fs-xl: 2.3125rem;
+  --fs-600: 1.5;
+  --fs-500: 1.25;
+  --fx-400: 1rem;
 }
 
 /* Box sizing rules */
@@ -51,9 +56,16 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
+  font-size: var(--fx-400);
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+}
+
+h1,
+h2,
+h3{
+  font-size: var(--fs-xl);
 }
 
 /* A elements that don't have a class get default styles */
@@ -75,20 +87,38 @@ textarea,
 select {
   font: inherit;
 }
+.App{
+  height: 100vh;
+}
+
+.sorting-visualizer{
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 2em;
+}
 
 .container{
   width: 80%;
   margin: 0 auto;
 }
 
+.text-center{
+  text-align: center;
+}
 .flex-row{
   display:flex;
   flex-direction:row;
   justify-content: space-between;
 }
 
-.restricted{
-  
+.flex-center{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
 }
 
 .button{
@@ -102,4 +132,16 @@ select {
 }
 .button:hover{
   background-color: #d17e11ab;
+}
+
+@media (max-height: 800px){
+  :root{
+    --fs-xl: 1.5rem;
+    --fs-600: 1.25rem;
+    --fs-500: 1rem;
+    --fx-400: .75rem;
+  }
+  .sorting-visualizer{
+    height: 50vh;
+  }
 }

@@ -5,7 +5,9 @@ const Header = () => {
     return (
         <div className="nav">
             <div className="container flex-col header">
-                <h1>Sorting Algorithms Visualizer</h1>
+                <div className="app-title text-center">
+                    <h1>Sorting Algorithms Visualizer</h1>
+                </div>
                 <span className="choose">Choose Algorithm</span>
                 <CustomSelectBox/>
             </div>
