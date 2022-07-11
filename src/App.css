@@ -136,6 +136,44 @@ select {
   background-color: #d17e11ab;
 }
 
+.sliderSpan{
+  color:#fff;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  /* border: #fff solid 2px; */
+  background: var(--bg-clr-accent);
+  transform: translateY(-50%);
+  padding:1em;
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.customSlider{
+  width: 100%;
+  height: 10px;
+}
+
+.customSlider-track{
+  height: 4px;
+  background: #fff;
+}
+.customSlider-track.customSlider-track-0{
+  background: var(--bg-clr-accent);
+}
+.customSlider > .thumb {
+  cursor: pointer;
+  background: var(--bg-clr-accent);
+  width: calc(var(--fs-xl) / 1.7125);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  outline: none;
+  transform: translate(-10% ,-40%);
+}
+.customSlider > .thumb:hover {
+  box-shadow: 0 0 0 3px var(--bg-clr-accent-transparent);
+}
+
 @media (max-height: 800px){
   :root{
     --fs-xl: 1.5rem;

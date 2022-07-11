@@ -1,20 +1,24 @@
 import '../Styles/CustomSlider.css';
 import ReactSlider from 'react-slider';
-const CustomSlider = ({sliderHandler, sliderValue}) => {
+import { useState ,useEffect } from 'react';
+const CustomSlider = ({sliderClassName,sliderHandler, sliderValue}) => {
+    const [spanValue, setSpanValue] = useState(5);
     return ( 
-        
-        <ReactSlider
-        className='customSlider'
-        trackClassName='customSlider-track'
-        defaultValue={50}
-        value={sliderValue}
-        onChange={value => {
-            sliderHandler(value);
-        }}
-        min={5}
-        max={100}
-        />
-        
+        <div className={sliderClassName + "-slider"}>
+            <span className="sliderSpan flex-center">{spanValue}</span>
+            <ReactSlider
+            className='customSlider'
+            trackClassName='customSlider-track'
+            defaultValue={5}
+            value={sliderValue}
+            onChange={value => {
+                sliderHandler(value);
+                setSpanValue(value);
+            }}
+            min={5}
+            max={100}
+            />
+        </div>
      );
 }
  

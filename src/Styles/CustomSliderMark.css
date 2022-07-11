@@ -1,0 +1,20 @@
+.sorting-speed-slider {
+    width: calc(var(--fs-xl) * 10);
+    padding: .5em;
+}
+
+.customSlider-mark {
+    width: 10px;
+    aspect-ratio: 1;
+    background: var(--bg-clr-accent);
+    border: solid #fff 2px;
+    top: -3px;
+}
+
+.customSlider-mark.customSlider-mark-before {
+    border: var(--bg-clr-accent);
+}
+
+.customSlider-mark.customSlider-mark-active {
+    display: none;
+}

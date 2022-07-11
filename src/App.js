@@ -6,126 +6,160 @@ import * as algos from './Helpers/Algorithms';
 
 import './App.css';
 function App() {
-  var [array, setArray] = useState([]);
-  var [arraySize, setArraySize] = useState(61);
-  var [sliderValue, setSliderValue] = useState(61);
-
+  const [array, setArray] = useState([])
+  const [arraySize, setArraySize] = useState(5)
+  const [sliderValue, setSliderValue] = useState(5)
+  const [animationSpeed, setAnimationSpeed] = useState(500)
   var ACCENT_COLOR = "#dd9230";
   var SECONDARY_COLOR = "#000";
 
   const handleSlide = (value) => {
-    setSliderValue(value);
+		setSliderValue(value)
   }
 
   const handleResetClick = () => {
-    resetColors();
-    return newRandomizedArray();
+		resetColors()
+		return newRandomizedArray()
   }
- 
+
+  const handleSpeedSlide = (value) => {
+		switch (value) {
+			case 0:
+				setAnimationSpeed(500)
+				break
+			case 1:
+				setAnimationSpeed(100)
+				break
+			case 2:
+				setAnimationSpeed(50)
+				break
+			case 3:
+				setAnimationSpeed(15)
+				break
+			case 4:
+				setAnimationSpeed(5)
+				break
+			case 5:
+				setAnimationSpeed(3)
+				break
+
+			default:
+				break
+		}
+  }
+
   const handleBeginClick = async () => {
-    const selected = document.querySelector(".select-box").value;
-    const beginBtn = document.querySelector(".begin");
-    switch (selected) {
-      case "bubble":
-          beginBtn.disabled = true;
-          await new Promise((resolve, reject) => {
+		const selected = document.querySelector(".select-box").value
+		const beginBtn = document.querySelector(".begin")
+		switch (selected) {
+			case "bubble":
+				beginBubbleSort()
+				break
+			case "merge":
+				// beginBubbleSort();
+				break
+			case "quick":
+				// beginBubbleSort();
+				break
+			case "selection":
+				// beginBubbleSort();
+				break
 
-            resolve(beginBubbleSort());
-          });
-          beginBtn.disabled = false;
-        break;
-      case "merge":
-          // beginBubbleSort();
-        break;
-      case "quick":
-          // beginBubbleSort();
-        break;
-      case "selection":
-          // beginBubbleSort();
-        break;
-    
-      default:
-        break;
-    }
+			default:
+				break
+		}
   }
 
-  var animations = algos.bubbleSort(array);
   function beginBubbleSort() {
-    var unsortedEle = arraySize;
-    if (animations === undefined){
-      return;
-    } else {
-      animations.steps.forEach((step, index) => {
-        const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0]+1})`);
-        const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1]+1})`);
-        
-        const isColorChange = index % 3 !== 1;
-        if (isColorChange){
-          const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
-          setTimeout(() => {
-            firstEle.style.background = color;
-            secondEle.style.background = color;
-          }, arraySize <= 50 ? index * 40 : index * 5)
-          if (index % 3 === 2 && step[1] === unsortedEle - 1){
-            const doneEle = document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`);
-            const lastEle = unsortedEle === 1 ? document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`) : null;
-            setTimeout(() => {
-              doneEle.style.background = ACCENT_COLOR;
-              if (lastEle !== null){
-                lastEle.style.background = ACCENT_COLOR;
-              }
-            }, arraySize <= 50 ? index * 40 : index * 5);
-          }
-        } else if (animations.swap[index]){
-          setTimeout(() => {
-            swapAnimation(step[0], step[1]);
-          }, arraySize <= 50 ? index * 40 : index * 5)
-        }
-      })
-    }
+		var animations = algos.bubbleSort(array)
+		var unsortedEle = arraySize
+		if (animations === undefined) {
+			return
+		} else {
+			animations.steps.forEach((step, index) => {
+				const firstEle = document.querySelector(
+					`.sorting-visualizer :nth-child(${step[0] + 1})`
+				)
+				const secondEle = document.querySelector(
+					`.sorting-visualizer :nth-child(${step[1] + 1})`
+				)
+
+				const isColorChange = index % 3 !== 1
+				if (isColorChange) {
+					const color =
+						index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+					setTimeout(() => {
+						firstEle.style.background = color
+						secondEle.style.background = color
+					}, index * animationSpeed)
+					if (index % 3 === 2 && step[1] === unsortedEle - 1) {
+						const doneEle = document.querySelector(
+							`.sorting-visualizer :nth-child(${unsortedEle--})`
+						)
+						const lastEle =
+							unsortedEle === 1
+								? document.querySelector(
+										`.sorting-visualizer :nth-child(${unsortedEle--})`
+								  )
+								: null
+						setTimeout(() => {
+							doneEle.style.background = ACCENT_COLOR
+							if (lastEle) {
+								lastEle.style.background = ACCENT_COLOR
+							}
+						}, index * animationSpeed)
+					}
+				} else if (animations.swap[index]) {
+					setTimeout(() => {
+						swapAnimation(step[0], step[1])
+					}, index * animationSpeed)
+				}
+			})
+		}
   }
 
   useEffect(() => {
-    newRandomizedArray();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+		newRandomizedArray()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize])
 
-  useEffect(() =>{
-    setArraySize(sliderValue);
-    resetColors();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+		setArraySize(sliderValue)
+		resetColors()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sliderValue])
 
-  useEffect (() => {
-    return newRandomizedArray();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+		return newRandomizedArray()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function newRandomizedArray(){
-      var newArray = [];
-      for (let i = 0; i < arraySize; i++) {
-        newArray[i] = randomIntFromInterval(5, 100);
-      }
-      setArray(newArray);
+  function newRandomizedArray() {
+		var newArray = []
+		for (let i = 0; i < arraySize; i++) {
+			newArray[i] = randomIntFromInterval(5, 100)
+		}
+		setArray(newArray)
   }
 
-  function resetColors(){
-    const bars = document.querySelectorAll(".bar");
-    bars.forEach(bar => {
-      bar.style.background = SECONDARY_COLOR;
-    });
+  function resetColors() {
+		const bars = document.querySelectorAll(".bar")
+		bars.forEach((bar) => {
+			bar.style.background = SECONDARY_COLOR
+		})
   }
   return (
-      <div className="App">
-          <Header/>
-          <SortingVisualizer array={array}/>
-          <Footer
-            sliderHandler = {handleSlide}
-            handleNewArrayClick={handleResetClick}
-            handleBeginClick={handleBeginClick}
-          />
-      </div>
-  );
+		<div className="App">
+			<Header />
+			<SortingVisualizer array={array} />
+			<Footer
+				sliderHandler={handleSlide}
+				speedSliderHandler={handleSpeedSlide}
+				handleNewArrayClick={handleResetClick}
+				handleBeginClick={handleBeginClick}
+			/>
+		</div>
+  )
 }
 
 const swapAnimation = (firstPos, secondPos) => {
