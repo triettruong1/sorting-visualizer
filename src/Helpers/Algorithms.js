@@ -13,20 +13,16 @@ export const bubbleSort = sortingArray => {
             {
                 [array[j], array[j+1]] = [array[j+1], array[j]];
                 animations.steps[stepCounter] = [j, j+1];
-                animations.swap[stepCounter] = true;
-                stepCounter++;
+                animations.swap[stepCounter++] = true;
                 animations.steps[stepCounter] = [j, j+1];
-                animations.swap[stepCounter] = true;
-                stepCounter++;
+                animations.swap[stepCounter++] = true;
                 animations.steps[stepCounter] = [j, j+1];
                 animations.swap[stepCounter] = true;
             } else{
                 animations.steps[stepCounter] = [j, j+1];
-                animations.swap[stepCounter] = false;
-                stepCounter++;
+                animations.swap[stepCounter++] = false;
                 animations.steps[stepCounter] = [j, j+1];
-                animations.swap[stepCounter] = false;
-                stepCounter++;
+                animations.swap[stepCounter++] = false;
                 animations.steps[stepCounter] = [j, j+1];
                 animations.swap[stepCounter] = false;
             }

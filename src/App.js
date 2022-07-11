@@ -13,8 +13,8 @@ function App() {
   var ACCENT_COLOR = "#dd9230";
   var SECONDARY_COLOR = "#000";
 
-  const handleSlide = (event) => {
-    setSliderValue(event.target.value);
+  const handleSlide = (value) => {
+    setSliderValue(value);
   }
 
   const handleResetClick = () => {
@@ -87,15 +87,18 @@ function App() {
 
   useEffect(() => {
     newRandomizedArray();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize])
 
   useEffect(() =>{
     setArraySize(sliderValue);
     resetColors();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sliderValue])
 
   useEffect (() => {
     return newRandomizedArray();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function newRandomizedArray(){

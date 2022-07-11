@@ -1,6 +1,7 @@
 :root{
   --bg-clr-accent: #dd9230;
   --bg-clr-accent-hover: #a36f2b;
+  --bg-clr-accent-transparent: rgba(221,146,48,0.5);
 
   --fs-xl: 2.3125rem;
   --fs-600: 1.5;
