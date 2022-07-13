@@ -32,3 +32,60 @@ export const bubbleSort = sortingArray => {
     animations.array = array.slice();
     return animations;
 };
+
+export const getMergeSortAnimations = (sortingArray) => {
+    let auxiliaryArray = sortingArray.slice();
+    let animations = []
+    mergeSortRecur(sortingArray, auxiliaryArray, 0, sortingArray.length - 1, animations);
+    return animations;
+}
+
+const mergeSortRecur = (sortingArray, auxiliaryArray, startIdx, endIdx, animations) => {
+    if (startIdx === endIdx) return;
+    var midIdx = Math.floor((endIdx + startIdx) / 2);
+    mergeSortRecur(auxiliaryArray, sortingArray, startIdx, midIdx, animations);
+    mergeSortRecur(auxiliaryArray, sortingArray, midIdx + 1, endIdx, animations);
+
+    doMerge(sortingArray, auxiliaryArray, startIdx, midIdx, endIdx, animations);
+    
+}
+
+const doMerge = (sortingArray, auxiliaryArray, startIdx, midIdx, endIdx, animations) => {
+    let k = startIdx;
+    let i = startIdx;
+    let j = midIdx + 1;
+    while(i <= midIdx && j <= endIdx)
+    {
+        animations.push([i, j]);
+        animations.push([i, j]);
+
+        if (auxiliaryArray[i] <= auxiliaryArray[j]){
+            animations.push([k, auxiliaryArray[i]]);
+            
+            sortingArray[k++] = auxiliaryArray[i++];
+        } else {
+            animations.push([k, auxiliaryArray[j]])
+
+            sortingArray[k++] = auxiliaryArray[j++];
+        }
+    }
+    
+
+    while(i <= midIdx){
+        animations.push([i, i])
+        animations.push([i, i])
+        animations.push([k, auxiliaryArray[i]])
+        sortingArray[k++] = auxiliaryArray[i++];
+    }
+
+    while(j <= endIdx){
+        animations.push([j, j])
+        animations.push([j, j])
+        animations.push([k, auxiliaryArray[j]])
+
+        sortingArray[k++] = auxiliaryArray[j++];
+    }
+
+}
+
+    

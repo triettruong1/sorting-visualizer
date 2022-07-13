@@ -50,13 +50,16 @@ function App() {
 
   const handleBeginClick = async () => {
 		const selected = document.querySelector(".select-box").value
-		const beginBtn = document.querySelector(".begin")
+		// const beginBtn = document.querySelector(".begin")
 		switch (selected) {
 			case "bubble":
+				// console.log(array);
 				beginBubbleSort()
 				break
 			case "merge":
-				// beginBubbleSort();
+				// console.log(array);
+
+				beginMergeSort();
 				break
 			case "quick":
 				// beginBubbleSort();
@@ -73,51 +76,61 @@ function App() {
   function beginBubbleSort() {
 		var animations = algos.bubbleSort(array)
 		var unsortedEle = arraySize
-		if (animations === undefined) {
-			return
-		} else {
-			animations.steps.forEach((step, index) => {
-				const firstEle = document.querySelector(
-					`.sorting-visualizer :nth-child(${step[0] + 1})`
-				)
-				const secondEle = document.querySelector(
-					`.sorting-visualizer :nth-child(${step[1] + 1})`
-				)
+	
+		animations.steps.forEach((step, index) => {
+			const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
+			const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
 
-				const isColorChange = index % 3 !== 1
-				if (isColorChange) {
-					const color =
-						index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+			const isColorChange = index % 3 !== 1
+			if (isColorChange) {
+				const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+				setTimeout(() => {
+					firstEle.style.background = color
+					secondEle.style.background = color
+				}, index * animationSpeed)
+				if (index % 3 === 2 && step[1] === unsortedEle - 1) {
+					const doneEle = document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`)
+					const lastEle =
+						unsortedEle === 1 ? document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`) : null
 					setTimeout(() => {
-						firstEle.style.background = color
-						secondEle.style.background = color
-					}, index * animationSpeed)
-					if (index % 3 === 2 && step[1] === unsortedEle - 1) {
-						const doneEle = document.querySelector(
-							`.sorting-visualizer :nth-child(${unsortedEle--})`
-						)
-						const lastEle =
-							unsortedEle === 1
-								? document.querySelector(
-										`.sorting-visualizer :nth-child(${unsortedEle--})`
-								  )
-								: null
-						setTimeout(() => {
-							doneEle.style.background = ACCENT_COLOR
-							if (lastEle) {
-								lastEle.style.background = ACCENT_COLOR
-							}
-						}, index * animationSpeed)
-					}
-				} else if (animations.swap[index]) {
-					setTimeout(() => {
-						swapAnimation(step[0], step[1])
+						doneEle.style.background = ACCENT_COLOR
+						if (lastEle) {
+							lastEle.style.background = ACCENT_COLOR
+						}
 					}, index * animationSpeed)
 				}
-			})
-		}
+			} else if (animations.swap[index]) {
+				setTimeout(() => {
+					swapAnimation(step[0], step[1])
+				}, index * animationSpeed)
+			}
+		})
+	
   }
 
+  function beginMergeSort() {
+		const animations = algos.getMergeSortAnimations(array);
+		
+		animations.forEach((step,index) => {
+			const bars = document.querySelectorAll(".bar");
+			const isColorChange = index % 3 !== 2;
+			if (isColorChange){
+				const [barOneIdx, barTwoIdx] = step;
+				const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
+				setTimeout(() => {
+					bars[barOneIdx].style.background = color;	
+					bars[barTwoIdx].style.background = color;	
+					console.log(bars[barOneIdx].style.height);
+				}, index * animationSpeed)
+			} else {
+				setTimeout(() => {
+					const [barOneIdx, newHeight] = step;
+					bars[barOneIdx].style.height = `${newHeight}%`;
+				}, index * animationSpeed)
+
+			}
+		});
+  }
   useEffect(() => {
 		newRandomizedArray()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
