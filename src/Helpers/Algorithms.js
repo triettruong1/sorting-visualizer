@@ -88,4 +88,55 @@ const doMerge = (sortingArray, auxiliaryArray, startIdx, midIdx, endIdx, animati
 
 }
 
-    
+export const getQuickSortAnimations = (sortingArray) => {
+    const auxiliaryArray = sortingArray.slice();
+    const animations = {
+        steps: [],
+        swap: []
+    };
+    quickSortRecur(sortingArray, 0, sortingArray.length - 1, animations);
+    return animations;
+}
+const quickSortRecur = (sortingArray, startIdx, endIdx, animations) =>{
+    if (startIdx > endIdx) return;
+    const pivotIdx = getPivot(sortingArray, startIdx, endIdx, animations);
+    quickSortRecur(sortingArray, startIdx, pivotIdx-1, animations);
+    quickSortRecur(sortingArray, pivotIdx + 1, endIdx, animations);
+}
+
+const getPivot = (sortingArray, startIdx, endIdx, animations) => {
+    const pivot = sortingArray[endIdx];
+    let eleFromLeft = startIdx - 1, eleFromRight = startIdx;
+    let stepCounter = 0;
+    while(eleFromRight < endIdx) {
+        // console.log(eleFromLeft + " " + eleFromRight);
+        if (sortingArray[eleFromRight] < pivot){
+            animations.steps.push([eleFromLeft,eleFromRight]);
+            animations.swap.push(true);
+            animations.steps.push([eleFromLeft,eleFromRight]);
+            animations.swap.push(true);
+            eleFromLeft++;
+            animations.steps.push([eleFromLeft, eleFromRight]);
+            animations.swap.push(true);
+            [sortingArray[eleFromLeft], sortingArray[eleFromRight]] = [sortingArray[eleFromRight], sortingArray[eleFromLeft]]
+        } else {
+            animations.steps.push([eleFromLeft,eleFromRight]);
+            animations.swap.push(false);
+            animations.steps.push([eleFromLeft,eleFromRight]);
+            animations.swap.push(false);
+            animations.steps.push([eleFromLeft,eleFromRight]);
+            animations.swap.push(false);
+        }
+        eleFromRight++;
+        stepCounter++;
+    }
+    animations.steps.push([eleFromLeft + 1, endIdx]);
+    animations.swap.push(true);
+    animations.steps.push([eleFromLeft + 1, endIdx]);
+    animations.swap.push(true);
+    animations.steps.push([eleFromLeft + 1, endIdx]);
+    animations.swap.push(true);
+    [sortingArray[eleFromLeft+1], sortingArray[endIdx]] = [sortingArray[endIdx], sortingArray[eleFromLeft+1]];
+
+    return eleFromLeft + 1;
+}

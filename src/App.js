@@ -53,16 +53,13 @@ function App() {
 		// const beginBtn = document.querySelector(".begin")
 		switch (selected) {
 			case "bubble":
-				// console.log(array);
 				beginBubbleSort()
 				break
 			case "merge":
-				// console.log(array);
-
 				beginMergeSort();
 				break
 			case "quick":
-				// beginBubbleSort();
+				beginQuickSort();
 				break
 			case "selection":
 				// beginBubbleSort();
@@ -75,7 +72,6 @@ function App() {
 
   function beginBubbleSort() {
 		var animations = algos.bubbleSort(array)
-		var unsortedEle = arraySize
 	
 		animations.steps.forEach((step, index) => {
 			const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
@@ -88,17 +84,6 @@ function App() {
 					firstEle.style.background = color
 					secondEle.style.background = color
 				}, index * animationSpeed)
-				if (index % 3 === 2 && step[1] === unsortedEle - 1) {
-					const doneEle = document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`)
-					const lastEle =
-						unsortedEle === 1 ? document.querySelector(`.sorting-visualizer :nth-child(${unsortedEle--})`) : null
-					setTimeout(() => {
-						doneEle.style.background = ACCENT_COLOR
-						if (lastEle) {
-							lastEle.style.background = ACCENT_COLOR
-						}
-					}, index * animationSpeed)
-				}
 			} else if (animations.swap[index]) {
 				setTimeout(() => {
 					swapAnimation(step[0], step[1])
@@ -120,7 +105,6 @@ function App() {
 				setTimeout(() => {
 					bars[barOneIdx].style.background = color;	
 					bars[barTwoIdx].style.background = color;	
-					console.log(bars[barOneIdx].style.height);
 				}, index * animationSpeed)
 			} else {
 				setTimeout(() => {
@@ -130,6 +114,27 @@ function App() {
 
 			}
 		});
+  }
+
+  function beginQuickSort() {
+	const animations = algos.getQuickSortAnimations(array);
+	animations.steps.forEach((step, index) => {
+		console.log(step);
+		const bars = document.querySelectorAll(".bar");
+		const isColorChange = index % 3 !== 2;
+		if (isColorChange){
+			let [barOneIdx, barTwoIdx] = step;
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
+			setTimeout(() => {
+				bars[barOneIdx].style.background = color;
+				bars[barTwoIdx].style.background = color;
+			}, index * animationSpeed)
+		} else if (animations.swap[index]){
+			setTimeout(() => {
+				swapAnimation(step[0], step[1]);
+			}, index * animationSpeed)
+		}
+	});
   }
   useEffect(() => {
 		newRandomizedArray()
