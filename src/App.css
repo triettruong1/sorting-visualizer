@@ -6,7 +6,7 @@
   --fs-xl: 2.3125rem;
   --fs-600: 1.5;
   --fs-500: 1.25;
-  --fx-400: 1rem;
+  --fs-400: 1rem;
 }
 
 /* Box sizing rules */
@@ -57,7 +57,7 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  font-size: var(--fx-400);
+  font-size: var(--fs-400);
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -105,8 +105,8 @@ select {
 
 .sliderSpan{
   color:#fff;
-  width: 1em;
-  height: 1em;
+  width: var(--fs-400);
+  height: var(--fs-400);
   border-radius: 50%;
   /* border: #fff solid 2px; */
   background: var(--bg-clr-accent);
@@ -165,7 +165,8 @@ select {
 
 .button{
   border: none;
-  padding: .5em 1em;
+  padding: calc(var(--fs-400)/2) var(--fs-400);
+  font-size: var(--fs-400);
   background: var(--bg-clr-accent);
   color: #fff;
   border-radius: 3px;
@@ -182,9 +183,31 @@ select {
     --fs-xl: 1.5rem;
     --fs-600: 1.25rem;
     --fs-500: 1rem;
-    --fx-400: .75rem;
+    --fs-400: .75rem;
   }
   .sorting-visualizer{
     height: 50vh;
+  }
+}
+@media (max-width: 500px){
+  :root{
+    --fs-xl: 1.5rem;
+    --fs-600: 1.25rem;
+    --fs-500: 1rem;
+    --fs-400: .75rem;
+  }
+  .buttons > * {
+    padding: calc(var(--fs-400)/4) calc(var(--fs-400)/2);
+  }
+}
+@media (max-width: 300px){
+  :root{
+    --fs-xl: 1.25rem;
+    --fs-600: 1rem;
+    --fs-500: .75rem;
+    --fs-400: .5rem;
+  }
+  .buttons > * {
+    padding: calc(var(--fs-400)/6) calc(var(--fs-400)/3);
   }
 }
