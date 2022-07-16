@@ -85,7 +85,6 @@ const doMerge = (sortingArray, auxiliaryArray, startIdx, midIdx, endIdx, animati
 }
 
 export const getQuickSortAnimations = (sortingArray) => {
-    const auxiliaryArray = sortingArray.slice();
     const animations = {
         steps: [],
         swap: []
@@ -104,7 +103,6 @@ const quickSortRecur = (sortingArray, startIdx, endIdx, animations) =>{
 const getPivot = (sortingArray, startIdx, endIdx, animations) => {
     const pivot = sortingArray[endIdx];
     let eleFromLeft = startIdx - 1, eleFromRight = startIdx;
-    let stepCounter = 0;
     while(eleFromRight < endIdx) {
         // console.log(eleFromLeft + " " + eleFromRight);
         if (sortingArray[eleFromRight] < pivot){
@@ -125,7 +123,6 @@ const getPivot = (sortingArray, startIdx, endIdx, animations) => {
             animations.swap.push(false);
         }
         eleFromRight++;
-        stepCounter++;
     }
     animations.steps.push([eleFromLeft + 1, endIdx]);
     animations.swap.push(true);
@@ -149,7 +146,6 @@ export const getSelectionSortAnimations = (sortingArray) =>{
 }
 
 const selectionSort = (sortingArray, animations) => {
-    let stepCounter = 0;
     for (let placementIdx = 0; placementIdx < sortingArray.length - 1; placementIdx++) {
         let smallestValueIdx = placementIdx;
         for (let i = placementIdx + 1; i < sortingArray.length; i++) {

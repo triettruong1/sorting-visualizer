@@ -1,5 +1,5 @@
 import ReactSlider from "react-slider";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../Styles/CustomSliderMark.css";
 
 const CustomSliderWithMark = ({speedSliderHandler, sliderClassName , isDisabled}) => {
