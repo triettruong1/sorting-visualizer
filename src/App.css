@@ -172,7 +172,7 @@ select {
   text-transform: initial;
   cursor: pointer;
 }
-.button:hover,:focus{
+.button:hover{
   background-color: #d17e11ab;
 }
 

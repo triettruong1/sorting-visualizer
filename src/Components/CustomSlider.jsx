@@ -17,6 +17,7 @@ const CustomSlider = ({sliderClassName,sliderHandler, sliderValue, isDisabled}) 
             }}
             min={5}
             max={100}
+            disabled={isDisabled}
             />
         </div>
      );

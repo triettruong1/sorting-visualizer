@@ -48,9 +48,10 @@ function App() {
 				break
 		}
   }
-
+  
   const handleBeginClick = async () => {
-		const selected = document.querySelector(".select-box").value
+	  const selected = document.querySelector(".select-box").value;
+	  await setIsSorting(true);
 		switch (selected) {
 			case "bubble":
 				beginBubbleSort();
@@ -70,7 +71,8 @@ function App() {
   }
 
   function beginBubbleSort() {
-	var animations = algos.bubbleSort(array);
+	const animations = algos.bubbleSort(array);
+	let animationTime = 0;
 	animations.steps.forEach((step, index) => {
 		const bars = document.querySelectorAll(".bar");
 		const isColorChange = index % 3 !== 1;
@@ -86,33 +88,42 @@ function App() {
 				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
+		animationTime = index * animationSpeed;
 	});
+	setTimeout(() => {
+		setIsSorting(false);
+	}, animationTime)
   }
 
   function beginMergeSort() {
-		const animations = algos.getMergeSortAnimations(array);
-		animations.forEach((step,index) => {
-			const bars = document.querySelectorAll(".bar");
-			const isColorChange = index % 3 !== 2;
-			if (isColorChange){
-				const [barOneIdx, barTwoIdx] = step;
-				const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
-				setTimeout(() => {
-					bars[barOneIdx].style.background = color;	
-					bars[barTwoIdx].style.background = color;	
-				}, index * animationSpeed)
-			} else {
-				setTimeout(() => {
-					const [barOneIdx, newHeight] = step;
-					bars[barOneIdx].style.height = `${newHeight}%`;
-				}, index * animationSpeed)
-
-			}
-		});
+	const animations = algos.getMergeSortAnimations(array);
+	let animationTime = 0;
+	animations.forEach((step,index) => {
+		const bars = document.querySelectorAll(".bar");
+		const isColorChange = index % 3 !== 2;
+		if (isColorChange){
+			const [barOneIdx, barTwoIdx] = step;
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
+			setTimeout(() => {
+				bars[barOneIdx].style.background = color;	
+				bars[barTwoIdx].style.background = color;	
+			}, index * animationSpeed)
+		} else {
+			setTimeout(() => {
+				const [barOneIdx, newHeight] = step;
+				bars[barOneIdx].style.height = `${newHeight}%`;
+			}, index * animationSpeed)
+			animationTime = index * animationSpeed;
+		}
+	});
+	setTimeout(() => {
+		setIsSorting(false);
+	}, animationTime)
   }
 
   function beginQuickSort() {
 	const animations = algos.getQuickSortAnimations(array);
+	let animationTime = 0;	
 	animations.steps.forEach((step, index) => {
 		const bars = document.querySelectorAll(".bar");
 		const isColorChange = index % 3 !== 2;
@@ -128,11 +139,16 @@ function App() {
 				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
+		animationTime = index * animationSpeed;			
 	});
+	setTimeout(() => {
+		setIsSorting(false);
+	}, animationTime)	
   }
 
   function beginSelectionSort(){
-	var animations = algos.getSelectionSortAnimations(array)
+	var animations = algos.getSelectionSortAnimations(array);
+	let animationTime = 0;
 	animations.steps.forEach((step, index) => {
 		const bars = document.querySelectorAll(".bar");
 		const isColorChange = index % 3 !== 1;
@@ -148,7 +164,11 @@ function App() {
 				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
+		animationTime = index * animationSpeed;
 	})
+	setTimeout(() => {
+		setIsSorting(false);
+	}, animationTime)
   }
 
   useEffect(() => {

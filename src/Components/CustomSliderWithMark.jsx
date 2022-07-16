@@ -30,6 +30,7 @@ const CustomSliderWithMark = ({speedSliderHandler, sliderClassName , isDisabled}
                     }
                     return <span {...props} />;
                 }}
+                disabled={isDisabled}
             />
         </div>
     );
