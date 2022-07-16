@@ -6,10 +6,11 @@ import * as algos from './Helpers/Algorithms';
 
 import './App.css';
 function App() {
-  const [array, setArray] = useState([])
-  const [arraySize, setArraySize] = useState(5)
-  const [sliderValue, setSliderValue] = useState(5)
-  const [animationSpeed, setAnimationSpeed] = useState(500)
+  const [array, setArray] = useState([]);
+  const [arraySize, setArraySize] = useState(5);
+  const [sliderValue, setSliderValue] = useState(5);
+  const [animationSpeed, setAnimationSpeed] = useState(500);
+  const [isSorting, setIsSorting] = useState(false);
   var ACCENT_COLOR = "#dd9230";
   var SECONDARY_COLOR = "#000";
 
@@ -50,10 +51,9 @@ function App() {
 
   const handleBeginClick = async () => {
 		const selected = document.querySelector(".select-box").value
-		// const beginBtn = document.querySelector(".begin")
 		switch (selected) {
 			case "bubble":
-				beginBubbleSort()
+				beginBubbleSort();
 				break
 			case "merge":
 				beginMergeSort();
@@ -62,35 +62,34 @@ function App() {
 				beginQuickSort();
 				break
 			case "selection":
-				// beginBubbleSort();
+				beginSelectionSort();
 				break
-
+			
 			default:
 				break
 		}
   }
 
   function beginBubbleSort() {
-		var animations = algos.bubbleSort(array)
-	
-		animations.steps.forEach((step, index) => {
-			const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
-			const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
+	var animations = algos.bubbleSort(array)
 
-			const isColorChange = index % 3 !== 1
-			if (isColorChange) {
-				const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
-				setTimeout(() => {
-					firstEle.style.background = color
-					secondEle.style.background = color
-				}, index * animationSpeed)
-			} else if (animations.swap[index]) {
-				setTimeout(() => {
-					swapAnimation(step[0], step[1])
-				}, index * animationSpeed)
-			}
-		})
-	
+	animations.steps.forEach((step, index) => {
+		const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
+		const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
+
+		const isColorChange = index % 3 !== 1
+		if (isColorChange) {
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+			setTimeout(() => {
+				firstEle.style.background = color
+				secondEle.style.background = color
+			}, index * animationSpeed)
+		} else if (animations.swap[index]) {
+			setTimeout(() => {
+				swapAnimation(step[0], step[1])
+			}, index * animationSpeed)
+		}
+	})
   }
 
   function beginMergeSort() {
@@ -119,7 +118,6 @@ function App() {
   function beginQuickSort() {
 	const animations = algos.getQuickSortAnimations(array);
 	animations.steps.forEach((step, index) => {
-		console.log(step);
 		const bars = document.querySelectorAll(".bar");
 		const isColorChange = index % 3 !== 2;
 		if (isColorChange){
@@ -135,6 +133,28 @@ function App() {
 			}, index * animationSpeed)
 		}
 	});
+  }
+
+  function beginSelectionSort(){
+	var animations = algos.getSelectionSortAnimations(array)
+
+	animations.steps.forEach((step, index) => {
+		const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
+		const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
+
+		const isColorChange = index % 3 !== 1
+		if (isColorChange) {
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+			setTimeout(() => {
+				firstEle.style.background = color
+				secondEle.style.background = color
+			}, index * animationSpeed)
+		} else if (animations.swap[index]) {
+			setTimeout(() => {
+				swapAnimation(step[0], step[1])
+			}, index * animationSpeed)
+		}
+	})
   }
   useEffect(() => {
 		newRandomizedArray()
@@ -175,6 +195,7 @@ function App() {
 				speedSliderHandler={handleSpeedSlide}
 				handleNewArrayClick={handleResetClick}
 				handleBeginClick={handleBeginClick}
+				isDisabled={isSorting}
 			/>
 		</div>
   )

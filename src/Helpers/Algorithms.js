@@ -97,6 +97,7 @@ export const getQuickSortAnimations = (sortingArray) => {
     quickSortRecur(sortingArray, 0, sortingArray.length - 1, animations);
     return animations;
 }
+
 const quickSortRecur = (sortingArray, startIdx, endIdx, animations) =>{
     if (startIdx > endIdx) return;
     const pivotIdx = getPivot(sortingArray, startIdx, endIdx, animations);
@@ -139,4 +140,39 @@ const getPivot = (sortingArray, startIdx, endIdx, animations) => {
     [sortingArray[eleFromLeft+1], sortingArray[endIdx]] = [sortingArray[endIdx], sortingArray[eleFromLeft+1]];
 
     return eleFromLeft + 1;
+}
+
+export const getSelectionSortAnimations = (sortingArray) =>{
+    const animations = {
+        steps: [],
+        swap: []
+    }
+
+    selectionSort(sortingArray, animations)
+    return animations;
+}
+
+const selectionSort = (sortingArray, animations) => {
+    let stepCounter = 0;
+    for (let placementIdx = 0; placementIdx < sortingArray.length - 1; placementIdx++) {
+        let smallestValueIdx = placementIdx;
+        for (let i = placementIdx + 1; i < sortingArray.length; i++) {
+            animations.steps.push([smallestValueIdx, i]);
+            animations.steps.push([smallestValueIdx, i]);
+            animations.steps.push([smallestValueIdx, i]);
+            animations.swap.push(false);
+            animations.swap.push(false);
+            animations.swap.push(false);
+            if (sortingArray[i] < sortingArray[smallestValueIdx]){
+                smallestValueIdx = i;
+            }   
+        }
+        animations.steps.push([placementIdx ,smallestValueIdx]);
+        animations.steps.push([placementIdx ,smallestValueIdx]);
+        animations.steps.push([placementIdx ,smallestValueIdx]);
+        animations.swap.push(true);
+        animations.swap.push(true);
+        animations.swap.push(true);
+        [sortingArray[placementIdx], sortingArray[smallestValueIdx]] = [sortingArray[smallestValueIdx], sortingArray[placementIdx]]
+    }
 }

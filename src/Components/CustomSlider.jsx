@@ -1,7 +1,7 @@
 import '../Styles/CustomSlider.css';
 import ReactSlider from 'react-slider';
 import { useState ,useEffect } from 'react';
-const CustomSlider = ({sliderClassName,sliderHandler, sliderValue}) => {
+const CustomSlider = ({sliderClassName,sliderHandler, sliderValue, isDisabled}) => {
     const [spanValue, setSpanValue] = useState(5);
     return ( 
         <div className={sliderClassName + "-slider"}>
@@ -17,6 +17,7 @@ const CustomSlider = ({sliderClassName,sliderHandler, sliderValue}) => {
             }}
             min={5}
             max={100}
+            disabled={isDisabled}
             />
         </div>
      );

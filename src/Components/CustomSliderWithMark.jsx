@@ -2,7 +2,7 @@ import ReactSlider from "react-slider";
 import { useState, useEffect } from "react";
 import "../Styles/CustomSliderMark.css";
 
-const CustomSliderWithMark = ({speedSliderHandler, sliderClassName }) => {
+const CustomSliderWithMark = ({speedSliderHandler, sliderClassName , isDisabled}) => {
     const [currentValue, setCurrentValue] = useState(0);
 
     return (
@@ -30,6 +30,7 @@ const CustomSliderWithMark = ({speedSliderHandler, sliderClassName }) => {
                     }
                     return <span {...props} />;
                 }}
+                disabled={isDisabled}
             />
         </div>
     );

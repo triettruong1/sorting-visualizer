@@ -1,15 +1,15 @@
 import CustomSlider from './CustomSlider';
 import CustomSliderWithMark from './CustomSliderWithMark';
 import '../Styles/Footer.css';
-const Footer = ({sliderHandler, speedSliderHandler, sliderValue, handleNewArrayClick, handleBeginClick, handleShuffleClick}) => {
+const Footer = ({sliderHandler, speedSliderHandler, sliderValue, handleNewArrayClick, handleBeginClick, isDisabled}) => {
     return (  
         <footer className="flex-row controls">
             <div className="buttons">
-                <button className="button reset" onClick={handleNewArrayClick}>New Array</button>
-                <button className="button begin" onClick={handleBeginClick}>Begin</button>
+                <button disabled={isDisabled} className="button reset" onClick={handleNewArrayClick}>New Array</button>
+                <button disabled={isDisabled} className="button begin" onClick={handleBeginClick}>Begin</button>
             </div>
-            <CustomSliderWithMark speedSliderHandler={speedSliderHandler} sliderClassName="sorting-speed" />
-            <CustomSlider sliderClassName="array-size" sliderHandler={sliderHandler} sliderValue={sliderValue} />
+            <CustomSliderWithMark isDisabled={isDisabled} speedSliderHandler={speedSliderHandler} sliderClassName="sorting-speed" />
+            <CustomSlider isDisabled={isDisabled} sliderClassName="array-size" sliderHandler={sliderHandler} sliderValue={sliderValue} />
         </footer>
     );
 }
