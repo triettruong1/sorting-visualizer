@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sorting-visualizer/static/css/main.7caeb5a1.css",
+    "main.js": "/sorting-visualizer/static/js/main.4b187933.js",
+    "index.html": "/sorting-visualizer/index.html",
+    "main.7caeb5a1.css.map": "/sorting-visualizer/static/css/main.7caeb5a1.css.map",
+    "main.4b187933.js.map": "/sorting-visualizer/static/js/main.4b187933.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7caeb5a1.css",
+    "static/js/main.4b187933.js"
+  ]
+}
