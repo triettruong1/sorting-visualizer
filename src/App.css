@@ -88,6 +88,7 @@ textarea,
 select {
   font: inherit;
 }
+
 .App{
   height: 100vh;
 }
@@ -100,40 +101,6 @@ select {
   justify-content: center;
   align-items: flex-end;
   padding: 3em;
-}
-
-.container{
-  width: 80%;
-  margin: 0 auto;
-}
-
-.text-center{
-  text-align: center;
-}
-.flex-row{
-  display:flex;
-  flex-direction:row;
-  justify-content: space-between;
-}
-
-.flex-center{
-  display:flex;
-  flex-direction:column;
-  justify-content: center;
-  align-items: center;
-}
-
-.button{
-  border: none;
-  padding: .5em 1em;
-  background: var(--bg-clr-accent);
-  color: #fff;
-  border-radius: 3px;
-  text-transform: initial;
-  cursor: pointer;
-}
-.button:hover,:focus{
-  background-color: #d17e11ab;
 }
 
 .sliderSpan{
@@ -173,6 +140,42 @@ select {
 .customSlider > .thumb:hover {
   box-shadow: 0 0 0 3px var(--bg-clr-accent-transparent);
 }
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.flex-row{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+.flex-center{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button{
+  border: none;
+  padding: .5em 1em;
+  background: var(--bg-clr-accent);
+  color: #fff;
+  border-radius: 3px;
+  text-transform: initial;
+  cursor: pointer;
+}
+.button:hover,:focus{
+  background-color: #d17e11ab;
+}
+
 
 @media (max-height: 800px){
   :root{

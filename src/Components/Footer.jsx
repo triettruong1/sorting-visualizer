@@ -8,8 +8,8 @@ const Footer = ({sliderHandler, speedSliderHandler, sliderValue, handleNewArrayC
                 <button disabled={isDisabled} className="button reset" onClick={handleNewArrayClick}>New Array</button>
                 <button disabled={isDisabled} className="button begin" onClick={handleBeginClick}>Begin</button>
             </div>
-            <CustomSliderWithMark isDisabled={isDisabled} speedSliderHandler={speedSliderHandler} sliderClassName="sorting-speed" />
-            <CustomSlider isDisabled={isDisabled} sliderClassName="array-size" sliderHandler={sliderHandler} sliderValue={sliderValue} />
+            <CustomSliderWithMark sliderClassName="sorting-speed" speedSliderHandler={speedSliderHandler} />
+            <CustomSlider sliderClassName="array-size" sliderHandler={sliderHandler} sliderValue={sliderValue} />
         </footer>
     );
 }

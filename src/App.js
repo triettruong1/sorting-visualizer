@@ -15,12 +15,12 @@ function App() {
   var SECONDARY_COLOR = "#000";
 
   const handleSlide = (value) => {
-		setSliderValue(value)
+		setSliderValue(value);
   }
 
   const handleResetClick = () => {
-		resetColors()
-		return newRandomizedArray()
+		resetColors();
+		return newRandomizedArray();
   }
 
   const handleSpeedSlide = (value) => {
@@ -64,37 +64,33 @@ function App() {
 			case "selection":
 				beginSelectionSort();
 				break
-			
 			default:
 				break
 		}
   }
 
   function beginBubbleSort() {
-	var animations = algos.bubbleSort(array)
-
+	var animations = algos.bubbleSort(array);
 	animations.steps.forEach((step, index) => {
-		const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
-		const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
-
-		const isColorChange = index % 3 !== 1
+		const bars = document.querySelectorAll(".bar");
+		const isColorChange = index % 3 !== 1;
+		const [barOneIdx, barTwoIdx] = step;
 		if (isColorChange) {
-			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
 			setTimeout(() => {
-				firstEle.style.background = color
-				secondEle.style.background = color
+				bars[barOneIdx].style.background = color;
+				bars[barTwoIdx].style.background = color;
 			}, index * animationSpeed)
 		} else if (animations.swap[index]) {
 			setTimeout(() => {
-				swapAnimation(step[0], step[1])
+				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
-	})
+	});
   }
 
   function beginMergeSort() {
 		const animations = algos.getMergeSortAnimations(array);
-		
 		animations.forEach((step,index) => {
 			const bars = document.querySelectorAll(".bar");
 			const isColorChange = index % 3 !== 2;
@@ -120,8 +116,8 @@ function App() {
 	animations.steps.forEach((step, index) => {
 		const bars = document.querySelectorAll(".bar");
 		const isColorChange = index % 3 !== 2;
+		const [barOneIdx, barTwoIdx] = step;
 		if (isColorChange){
-			let [barOneIdx, barTwoIdx] = step;
 			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
 			setTimeout(() => {
 				bars[barOneIdx].style.background = color;
@@ -129,7 +125,7 @@ function App() {
 			}, index * animationSpeed)
 		} else if (animations.swap[index]){
 			setTimeout(() => {
-				swapAnimation(step[0], step[1]);
+				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
 	});
@@ -137,25 +133,24 @@ function App() {
 
   function beginSelectionSort(){
 	var animations = algos.getSelectionSortAnimations(array)
-
 	animations.steps.forEach((step, index) => {
-		const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${step[0] + 1})`)
-		const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${step[1] + 1})`)
-
-		const isColorChange = index % 3 !== 1
+		const bars = document.querySelectorAll(".bar");
+		const isColorChange = index % 3 !== 1;
+		const [barOneIdx, barTwoIdx] = step;
 		if (isColorChange) {
-			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR
+			const color = index % 3 === 0 ? ACCENT_COLOR : SECONDARY_COLOR;
 			setTimeout(() => {
-				firstEle.style.background = color
-				secondEle.style.background = color
+				bars[barOneIdx].style.background = color;
+				bars[barTwoIdx].style.background = color;
 			}, index * animationSpeed)
 		} else if (animations.swap[index]) {
 			setTimeout(() => {
-				swapAnimation(step[0], step[1])
+				swapAnimation(barOneIdx, barTwoIdx);
 			}, index * animationSpeed)
 		}
 	})
   }
+
   useEffect(() => {
 		newRandomizedArray()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -175,17 +170,18 @@ function App() {
   function newRandomizedArray() {
 		var newArray = []
 		for (let i = 0; i < arraySize; i++) {
-			newArray[i] = randomIntFromInterval(5, 100)
+			newArray[i] = randomIntFromInterval(5, 100);
 		}
 		setArray(newArray)
   }
 
   function resetColors() {
-		const bars = document.querySelectorAll(".bar")
+		const bars = document.querySelectorAll(".bar");
 		bars.forEach((bar) => {
 			bar.style.background = SECONDARY_COLOR
 		})
   }
+
   return (
 		<div className="App">
 			<Header />
@@ -205,11 +201,8 @@ const swapAnimation = (firstPos, secondPos) => {
   const firstEle = document.querySelector(`.sorting-visualizer :nth-child(${firstPos+1})`);
   const secondEle = document.querySelector(`.sorting-visualizer :nth-child(${secondPos+1})`);
 
-  const temp = firstEle.style.height;
-  firstEle.style.height = secondEle.style.height;
-  secondEle.style.height = temp;
+  [firstEle.style.height, secondEle.style.height] = [secondEle.style.height, firstEle.style.height];
 }
-
 
 const randomIntFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
